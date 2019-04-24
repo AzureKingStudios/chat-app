@@ -18,6 +18,7 @@ const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true});
 socket.on('message', (msg) => {
     console.log(msg);
     const html = Mustache.render(messageTemplate, {
+        username: msg.username,
         message: msg.text,
         createdAt: moment(msg.createdAt).format('h:mm a')
     });
@@ -27,6 +28,7 @@ socket.on('message', (msg) => {
 socket.on('locationMessage', (message) => {
     console.log(message);
     const html = Mustache.render(locationMessageTemplate, {
+        username: message.username,
         url: message.url,
         createdAt: moment(message.createdAt).format('h:mm a')
     });
